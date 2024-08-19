@@ -17,25 +17,34 @@ public class BouncingLines
     {
         _lineRenderer = lineRenderer;
         _positions = new Vector2[lineCount * 2];
-        _velocities = new Vector2[lineCount];
+        _velocities = new Vector2[lineCount * 2];
         _colors = new Vector3[lineCount];
         _bounds = bounds;
 
         var random = new Random();
         for (int i = 0; i < lineCount; i++)
         {
+            // Initialize start point
             _positions[i * 2] = new Vector2(
                 (float)(random.NextDouble() * bounds.X),
                 (float)(random.NextDouble() * bounds.Y));
 
+            // Initialize end point
             _positions[i * 2 + 1] = new Vector2(
                 (float)(random.NextDouble() * bounds.X),
                 (float)(random.NextDouble() * bounds.Y));
 
-            _velocities[i] = new Vector2(
+            // Initialize velocity for start point
+            _velocities[i * 2] = new Vector2(
                 (float)(random.NextDouble() * 2 - 1) * MaxSpeedComponent,
                 (float)(random.NextDouble() * 2 - 1) * MaxSpeedComponent);
 
+            // Initialize velocity for end point
+            _velocities[i * 2 + 1] = new Vector2(
+                (float)(random.NextDouble() * 2 - 1) * MaxSpeedComponent,
+                (float)(random.NextDouble() * 2 - 1) * MaxSpeedComponent);
+
+            // Initialize color for the line
             _colors[i] = new Vector3(
                 (float)random.NextDouble(),
                 (float)random.NextDouble(),
@@ -47,25 +56,21 @@ public class BouncingLines
     {
         float elapsedSeconds = (float)elapsedTime.TotalSeconds;
 
-        for (int i = 0; i < _velocities.Length; i++)
+        for (int i = 0; i < _positions.Length; i++)
         {
-            _positions[i * 2] += _velocities[i] * elapsedSeconds;
-            _positions[i * 2 + 1] += _velocities[i] * elapsedSeconds;
+            _positions[i] += _velocities[i] * elapsedSeconds;
 
-            for (int j = 0; j < 2; j++)
-            {
-                if (_positions[i * 2 + j].X < 0 || _positions[i * 2 + j].X > _bounds.X)
-                    _velocities[i].X *= -1;
+            if (_positions[i].X < 0 || _positions[i].X > _bounds.X)
+                _velocities[i].X *= -1;
 
-                if (_positions[i * 2 + j].Y < 0 || _positions[i * 2 + j].Y > _bounds.Y)
-                    _velocities[i].Y *= -1;
-            }
+            if (_positions[i].Y < 0 || _positions[i].Y > _bounds.Y)
+                _velocities[i].Y *= -1;
         }
     }
 
     public void Render()
     {
-        for (int i = 0; i < _velocities.Length; i++)
+        for (int i = 0; i < _colors.Length; i++)
         {
             _lineRenderer.DrawLine(_positions[i * 2], _positions[i * 2 + 1], _colors[i]);
         }

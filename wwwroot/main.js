@@ -8,12 +8,16 @@ const { setModuleImports, getAssemblyExports, getConfig } = await dotnet
   .withApplicationArgumentsFromQuery()
   .create();
 
-function drawLine(x1, y1, x2, y2) {
+function drawLine(x1, y1, x2, y2, r, g, b) {
   const canvas = document.getElementById("myCanvas");
   const ctx = canvas.getContext("2d");
   ctx.beginPath();
   ctx.moveTo(x1, y1);
   ctx.lineTo(x2, y2);
+  const color = `rgb(${Math.floor(r * 255)}, ${Math.floor(
+    g * 255
+  )}, ${Math.floor(b * 255)})`;
+  ctx.strokeStyle = color;
   ctx.stroke();
 }
 

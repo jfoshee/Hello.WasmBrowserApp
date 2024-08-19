@@ -4,6 +4,8 @@ This project was created from the `dotnet new wasmbrowser` template. It is a sim
 
 ## Environment
 
+.NET 8
+
 ```sh
 dotnet workload install wasi-experimental
 ```
@@ -20,11 +22,17 @@ dotnet build
 dotnet run
 ```
 
-Enjoy the bouncing lines.
+## Publishing
 
-![](screenshot.png)
+```sh
+dotnet publish ./Hello.WasmBrowserApp.csproj -r browser-wasm -c Release
+```
+Published files are in `bin/Release/net8.0/publish/wwwroot`
 
 ## References
 
-While this does not use WASI, you can read more about developments at [Extending WebAssembly to the Cloud with .NET
-](https://devblogs.microsoft.com/dotnet/extending-web-assembly-to-the-cloud/).
+While this does not use WASI, you can read more about developments at [Extending WebAssembly to the Cloud with .NET](https://devblogs.microsoft.com/dotnet/extending-web-assembly-to-the-cloud/).
+
+Enjoy the bouncing lines.
+
+![](screenshot.png)

@@ -18,7 +18,7 @@ setModuleImports('main.js', {
 
 const config = getConfig();
 const exports = await getAssemblyExports(config.mainAssemblyName);
-const text = exports.MyClass.Greeting();
+const text = exports.Hello.WasmBrowserApp.MyClass.Greeting();
 console.log(text);
 
 document.getElementById('out').innerHTML = text;

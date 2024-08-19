@@ -2,16 +2,24 @@
 <!--  Licensed to the .NET Foundation under one or more agreements. -->
 <!-- The .NET Foundation licenses this file to you under the MIT license. -->
 <html>
+  <head>
+    <title>Hello.WasmBrowserApp</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./main.js"></script>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
 
-<head>
-  <title>Hello.WasmBrowserApp</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type='module' src="./main.js"></script>
-</head>
+  <body>
+    <span id="out"></span>
 
-<body>
-  <span id="out"></span>
-</body>
+    <div>
+      <canvas id="myCanvas" width="500" height="500"></canvas>
+    </div>
 
+  </body>
 </html>

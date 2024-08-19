@@ -11,7 +11,9 @@ var bouncingLines = new BouncingLines(lineRenderer, lineCount: 10, bounds: new V
 
 while (true)
 {
-    bouncingLines.Update(TimeSpan.FromSeconds(1.0 / 60.0));
+    var dt = TimeSpan.FromSeconds(1.0 / 60.0);
+    bouncingLines.Update(dt);
     bouncingLines.Render();
-    await Task.Delay(16);
+    // Yield back to the browser
+    await Task.Delay(dt);
 }
